@@ -28,7 +28,7 @@ readlineSync.question(chalk.cyanBright("Let's Start "+chalk.yellow.bold(userName
 function play(question,answer){
     console.log();
     console.log(chalk.yellowBright(question.question));
-    var userAnswer=readlineSync.question(chalk.yellowBright("a : "+question.options[0]+"\n"+"b : "+question.options[1]+"\n"+"c : "+question.options[2]+"\n"+"d : "+question.options[3]+"\n\n")+chalk.magentaBright("Please chose an option..."+"\n"));
+    var userAnswer=readlineSync.question(chalk.yellowBright(displayOptions(question.options))+chalk.magentaBright("Please chose an option..."+"\n"));
   
     if(userAnswer===answer){
       console.log("----------------")
@@ -48,14 +48,22 @@ function play(question,answer){
     console.log();
 
     if(currentScore>=highestScorer.first.score){
-      console.log(chalk.magentaBright("Congratulations...!!! you have the new high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the highest scorer"))
+      console.log(chalk.magentaBright("Congratulations...!!! you have the new high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the highest scorer\n\n"+displayHighScorers()))
     }else if(currentScore>=highestScorer.second.score){
-      console.log(chalk.magentaBright("Congratulations...!!! you have the new second high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the second highest scorer"))
+      console.log(chalk.magentaBright("Congratulations...!!! you have the new second high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the second highest scorer\n\n"+displayHighScorers()))
     }else if(currentScore>=highestScorer.third.score){
-      console.log(chalk.magentaBright("Congratulations...!!! you have the new third high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the third highest scorer"))
+      console.log(chalk.magentaBright("Congratulations...!!! you have the new third high score of "+chalk.bold(currentScore)+", please send us a screenshot so that we can update the third highest scorer\n\n"+displayHighScorers()))
     }else{
-      console.log(chalk.magentaBright("You have scored "+chalk.yellowBright(currentScore)+" points"+"\n\n"+"The List of top 3 Scorers \n"+chalk.yellowBright(highestScorer.first.name)+" : "+chalk.yellowBright(highestScorer.first.score)+"\n"+chalk.yellowBright(highestScorer.second.name)+" : "+chalk.yellowBright(highestScorer.second.score)+"\n"+chalk.yellowBright(highestScorer.third.name)+" : "+chalk.yellowBright(highestScorer.third.score)));
+      console.log(chalk.magentaBright("You have scored "+chalk.yellowBright(currentScore)+" points\n\n"+displayHighScorers()));
     }
+  }
+
+  function displayOptions(options){
+    return "a : "+options[0]+"\n"+"b : "+options[1]+"\n"+"c : "+options[2]+"\n"+"d : "+options[3]+"\n\n";
+  }
+
+  function displayHighScorers(){
+    return "The list of current top 3 Scorers: \n"+chalk.yellowBright(highestScorer.first.name)+" : "+chalk.yellowBright(highestScorer.first.score)+"\n"+chalk.yellowBright(highestScorer.second.name)+" : "+chalk.yellowBright(highestScorer.second.score)+"\n"+chalk.yellowBright(highestScorer.third.name)+" : "+chalk.yellowBright(highestScorer.third.score);
   }
 
 if(score<5){
